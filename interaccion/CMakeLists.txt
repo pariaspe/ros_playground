@@ -185,6 +185,10 @@ include_directories(
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 
+catkin_install_python(PROGRAMS src/emocion_usuario_nodo.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 #############
 ## Testing ##
 #############
