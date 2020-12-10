@@ -1,16 +1,30 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import String
-#from inf_personal_usuario.msg import inf_personal_usuario
+from interaccion.msg import inf_personal_usuario
+
+RATE = 10
+
+def shutdown():
+    print(" ")
+    rospy.loginfo("Bye!")
+
 
 def talker():
-    pub = rospy.Publisher('inf_pers_topic', String, queue_size=10)  # topic
+    pub = rospy.Publisher('inf_pers_topic', inf_personal_usuario, queue_size=10)  # topic
     rospy.init_node('informacion_usuario_node', anonymous=True)  # node
-    rate = rospy.Rate(10) # 10hz
+    rospy.on_shutdown(shutdown)
+    rate = rospy.Rate(RATE) # 10hz
 
     while not rospy.is_shutdown():
-        msg = input("> ")
+        try:
+            name = str(raw_input("Nombre: "))
+            age = int(raw_input("Edad: "))
+            langs = raw_input("Idiomas: ")
+        except EOFError:
+            # shutdown
+            break
+        msg = inf_personal_usuario(nombre=name, edad=age, idiomas=langs.split(" "))
         rospy.loginfo(msg)
         pub.publish(msg)
         rate.sleep()
