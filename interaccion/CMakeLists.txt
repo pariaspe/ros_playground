@@ -51,6 +51,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   inf_personal_usuario.msg
+  usuario.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -161,6 +162,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 install(PROGRAMS
   src/informacion_personal_nodo.py
+  src/empaquetador_nodo.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
