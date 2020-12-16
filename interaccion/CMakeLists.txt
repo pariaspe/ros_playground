@@ -163,6 +163,7 @@ include_directories(
 install(PROGRAMS
   src/informacion_personal_nodo.py
   src/empaquetador_nodo.py
+  src/dialogo_nodo.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
