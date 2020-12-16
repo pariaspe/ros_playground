@@ -166,6 +166,7 @@ install(PROGRAMS
   src/empaquetador_nodo.py
   src/posicion_usuario_nodo.py
   src/emocion_usuario_nodo.py
+  src/dialogo_nodo.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
