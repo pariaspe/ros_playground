@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # license removed for brevity
 import rospy
-from pos_usuario.msg import pos_usuario
+from interaccion.msg import pos_usuario
 
 RATE = 10
 
@@ -9,10 +9,10 @@ def shutdown():
     print(" ")
     rospy.loginfo("Bye!")
 
-def pos_usuario():
+def posicion_usuario():
 
-    pub = rospy.Publisher('pos_usuario_topic', pos_usuario, queue_size=10)
-    rospy.init_node('posicion_usuario_nodo', anonymous=True) #nodo
+    pub = rospy.Publisher('pos_usuario_topic', pos_usuario, queue_size=10) # topic
+    rospy.init_node('posicion_usuario_nodo', anonymous=True) # nodo
     rospy.on_shutdown(shutdown)
     rate = rospy.Rate(RATE) # Frecuencia a 10hz
 
@@ -31,6 +31,6 @@ def pos_usuario():
 
 if __name__ == '__main__':
     try:
-        posicion_usuario_nodo()
+        posicion_usuario()
     except rospy.ROSInterruptException:
         pass
