@@ -22,6 +22,7 @@ class Empaquetador():
 
         rospy.Subscriber("/inf_pers_topic", inf_personal_usuario, self.inf_pers_cb)
         rospy.Subscriber("/emocion_topic", String, self.emocion_usr_cb)
+        rospy.Subscriber("/pos_usuario_topic", pos_usuario, self.posicion_cb)
 
         self.pub = rospy.Publisher("user_topic", usuario, queue_size=10)
 
@@ -35,8 +36,12 @@ class Empaquetador():
         #   self.send_package()
 
     def emocion_usr_cb(self, msg):
-        self.emocion_usr = msg
+        self.emocion = msg
         rospy.loginfo("Emotion received: " + str(msg))
+
+     def posicion_cb(self, msg):
+     	self.posicion_cb = msg
+     	rospy.loginfo("Position received: ({0} {1} {2})".format(str(msg.x), str(msg.y), str(msg.z)))
 
     def send_package(self):
         self.usuario_msg.infPersonal = self.inf_pers
