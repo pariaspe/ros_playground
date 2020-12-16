@@ -52,6 +52,7 @@ add_message_files(
   FILES
   inf_personal_usuario.msg
   usuario.msg
+  pos_usuario.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -163,6 +164,8 @@ include_directories(
 install(PROGRAMS
   src/informacion_personal_nodo.py
   src/empaquetador_nodo.py
+  src/posicion_usuario_nodo.py
+  src/emocion_usuario_nodo.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
