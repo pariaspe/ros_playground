@@ -21,6 +21,9 @@ class Dialogo():
         self.usuario_msg = msg
         rospy.loginfo(msg)
 
+        # resp = self.multiplicador(self.usuario_msg.edad)
+        # rospy.loginfo("Multiplicador:", resp)
+
 
 if __name__ == '__main__':
     try:
