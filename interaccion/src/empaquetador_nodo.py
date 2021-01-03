@@ -29,8 +29,8 @@ class Empaquetador():
             self.send_package()
 
     def emocion_usr_cb(self, msg):
-        self.emocion = str(msg)
-        rospy.loginfo("Emotion received: " + str(msg))
+        self.emocion = str(msg.data)
+        rospy.loginfo("Emotion received: " + str(msg.data))
         if self.inf_pers is not None and self.emocion is not None and self.posicion is not None:
             self.send_package()
 
