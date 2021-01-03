@@ -4,7 +4,6 @@ import rospy
 from std_msgs.msg import String
 
 def emocion_usuario_nodo():
-    
     prompt = "Enter a string: "
 
     pub = rospy.Publisher('emocion_topic', String, queue_size=10)
@@ -12,9 +11,14 @@ def emocion_usuario_nodo():
     rate = rospy.Rate(10) # 10hz
 
     while not rospy.is_shutdown():
-        #Take user input and transform ir to string
-        user_str = raw_input(prompt)
-        user_str = str(user_str)
+        try:
+            #Take user input and transform it to string
+            user_str = raw_input(prompt)
+            user_str = str(user_str)
+        except EOFError:
+            # shutdown
+            break
+
         #print(user_str)
 
         rospy.loginfo(user_str)

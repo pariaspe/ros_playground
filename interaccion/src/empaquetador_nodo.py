@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 
 import rospy
-from interaccion.msg import inf_personal_usuario, usuario
+from interaccion.msg import inf_personal_usuario, pos_usuario, usuario
 from std_msgs.msg import String
 
-### La idea es guardar el ultimo mensaje de cada tipo en un atributo de la
-### clase Empaquetador y en cada callback (metodo que se activa al recibir un
-### msg por un Subscriber) comprobar si ya tengo listo un msg de cada y llamar
-### a otro metodo que publica por el nodo salida.
-
-### Como vereis aun queda por declarar vuestros Subscribers, los callbacks
-### asociados e integrarlo en el envio. Cualquier sugerencia es bien recibida :)
 
 class Empaquetador():
     def __init__(self):
@@ -32,23 +25,28 @@ class Empaquetador():
     def inf_pers_cb(self, msg):
         self.inf_pers = msg
         rospy.loginfo("Inf pers received: ({0} {1} {2})".format(msg.nombre, msg.edad, msg.idiomas) )
-        # if self.inf_pers is not None and self.emocion is not None and self.posicion is not None:
-        #   self.send_package()
+        if self.inf_pers is not None and self.emocion is not None and self.posicion is not None:
+            self.send_package()
 
     def emocion_usr_cb(self, msg):
-        self.emocion = msg
+        self.emocion = str(msg)
         rospy.loginfo("Emotion received: " + str(msg))
+        if self.inf_pers is not None and self.emocion is not None and self.posicion is not None:
+            self.send_package()
 
-     def posicion_cb(self, msg):
-     	self.posicion_cb = msg
-     	rospy.loginfo("Position received: ({0} {1} {2})".format(str(msg.x), str(msg.y), str(msg.z)))
+    def posicion_cb(self, msg):
+        self.posicion = msg
+        rospy.loginfo("Position received: ({0} {1} {2})".format(str(msg.x), str(msg.y), str(msg.z)))
+        if self.inf_pers is not None and self.emocion is not None and self.posicion is not None:
+            self.send_package()
 
     def send_package(self):
         self.usuario_msg.infPersonal = self.inf_pers
         self.usuario_msg.emocion = self.emocion
-        #self.usuario_msg.posicion = self.posicion
+        self.usuario_msg.posicion = self.posicion
         self.pub.publish(self.usuario_msg)
-        rospy.loginfo(self.usuario_msg)
+        # rospy.loginfo(self.usuario_msg)  # debbuging
+        rospy.loginfo("Sending new package.")
 
         # Back to none
         self.inf_pers = None
