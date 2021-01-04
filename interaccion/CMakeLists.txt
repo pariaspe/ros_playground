@@ -69,6 +69,12 @@ add_message_files(
 #   Action2.action
 # )
 
+# Matematico_nodo servicio
+add_service_files(
+  FILES
+  multiplicador.srv
+)
+
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
@@ -167,6 +173,8 @@ install(PROGRAMS
   src/posicion_usuario_nodo.py
   src/emocion_usuario_nodo.py
   src/dialogo_nodo.py
+  src/matematico_nodo.py
+  scripts/test_mult.py # Solo para testing ELIMINAR
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

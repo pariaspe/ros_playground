@@ -1,0 +1,6 @@
+#Constant
+uint32 MULT=2
+#Edad - posible cambio por la edad del mensaje
+uint32 edad
+---
+int64 resultado # Evitar overflow de la multiplicacion?
