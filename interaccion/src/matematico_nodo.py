@@ -8,7 +8,7 @@ import rospy
 def multiplicar_edad(req):
     resultado = req.MULT * req.edad
     #Sustituir por ROS_INFO?
-    rospy.loginfo("La edad %s multiplicada por %s es %s ]"%(req.edad, req.MULT, resultado))
+    rospy.loginfo("La edad %s multiplicada por %s es %s"%(req.edad, req.MULT, resultado))
     return resultado
 
 def matematico_nodo():
