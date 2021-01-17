@@ -8,9 +8,9 @@ class Clock():
 
         self.start_flag = False
         # Recibir topic start_topic de dialogo_nodo para activar el timer
-        rospy.Subscriber("/start_topic", std_msgs/String, self.start_callback)
+        rospy.Subscriber("/start_topic", String, self.start_callback)
         # Recibir topic reset_topic de dialogo_nodo para resetear el timer
-        rospy.Subscriber("/reset_topic", std_msgs/String, self.reset_callback)
+        rospy.Subscriber("/reset_topic", String, self.reset_callback)
 
         timer_alive  = rospy.timer(rospy.Duration(60), self.still_alive)
 

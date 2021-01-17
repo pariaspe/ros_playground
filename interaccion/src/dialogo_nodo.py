@@ -28,11 +28,11 @@ class Dialogo():
             rospy.loginfo("Service failed: ", e)
 
         # Publishers (Timer)
-        #timer#self.start_pub = rospy.Publisher('start_topic', String, queue_size=10)
-        #timer#self.reset_pub = rospy.Publisher('reset_topic', String, queue_size=10)
+        self.start_pub = rospy.Publisher('start_topic', String, queue_size=10)
+        self.reset_pub = rospy.Publisher('reset_topic', String, queue_size=10)
 
         # Subscriber (Timer)
-        #timer#rospy.Subscriber("still_alive", Bool, self.still_alive_cb)
+        rospy.Subscriber("still_alive", Bool, self.still_alive_cb)
 
         rospy.init_node("dialogo_node")
         rospy.spin()
@@ -46,11 +46,11 @@ class Dialogo():
         resp = self.multiplicador(int(self.usuario_msg.infPersonal.edad))
         rospy.loginfo("Multiplicador: " + str(resp.resultado))
 
-        #timer#if not self.started:
-        #timer#    self.start_pub.publish("start")
-        #timer#    self.started = True
-        #timer#else:
-        #timer#    self.reset_pub.publish("reset")
+        if not self.started:
+            self.start_pub.publish("start")
+            self.started = True
+        else:
+            self.reset_pub.publish("reset")
 
         subprocess.Popen(["espeak", "-v", "es", sentence])
 
