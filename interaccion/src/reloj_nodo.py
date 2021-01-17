@@ -37,7 +37,7 @@ class Clock():
     # de dialogo_nodo
     def hora(self):
         current = rospy.Time.now()
-        seconds = current - self.last
+        seconds = current.secs - self.last.secs
 
         ttime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(current.secs))
         rospy.loginfo(ttime + " Z \n" + ttime + "+" + LOCAL_TIME + " (local)")
