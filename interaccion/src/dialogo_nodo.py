@@ -7,10 +7,6 @@ from interaccion.srv import multiplicador
 
 import subprocess
 
-## Cuidado al descomentar, hay parte del codigo que sirve para el servicio "multiplicador" y parte del "reloj".
-##    Multiplicador: los comentarios empiezan por #serv#
-##    Reloj: los comentarios empiezan por #timer#
-
 
 class Dialogo():
     def __init__(self):

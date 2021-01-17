@@ -8,5 +8,5 @@
     <node name="emocion" pkg="interaccion" type="emocion_usuario_nodo.py" launch-prefix="$(arg cmd-bash)"/>
     <node name="empaquetador" pkg="interaccion" type="empaquetador_nodo.py" output="screen"/>
     <node name="dialogo" pkg="interaccion" type="dialogo_nodo.py" launch-prefix="$(arg cmd-bash)"/>
-    <node name="reloj" pkg="interaccion" type="reloj_nodo.py" launch-prefix="$(arg cmd-bash)"/>
+    <node name="reloj" pkg="interaccion" type="reloj_nodo.py" output="screen"/>
 </launch>

@@ -4,7 +4,8 @@ import rospy
 from std_msgs.msg import String, Bool
 
 class Clock():
-    def _init_(self):
+    def __init__(self):
+        rospy.init_node("reloj_nodo")
 
         self.start_flag = False
         # Recibir topic start_topic de dialogo_nodo para activar el timer
@@ -12,10 +13,10 @@ class Clock():
         # Recibir topic reset_topic de dialogo_nodo para resetear el timer
         rospy.Subscriber("/reset_topic", String, self.reset_callback)
 
-        timer_alive  = rospy.timer(rospy.Duration(60), self.still_alive)
+        timer_alive  = rospy.Timer(rospy.Duration(60), self.still_alive)
 
-        pub = rospy.Publisher("still_alive", Bool, queue_size=10)
-        rospy.init_node("reloj_nodo")
+        self.pub = rospy.Publisher("still_alive", Bool, queue_size=10)
+
         rate = rospy.Rate(3) # 3Hz
 
         while not rospy.is_shutdown():
@@ -26,7 +27,7 @@ class Clock():
 
     # Enviar cada 60 segundos un topic still_alive a dialogo_nodo
     def still_alive(self):
-        pub.publish(True)
+        self.pub.publish()
 
     # Mostrar por pantalla cada 1/3 de segundo la hora local y en UTC
     # junto a los segundos transcurridos desde el ultimo topic recibido
@@ -47,9 +48,8 @@ class Clock():
     def reset_callback(self, msg):
         self.reset_msg = msg
         rospy.loginfo(msg)
-        self.last = rospy.Time.now()       
+        self.last = rospy.Time.now()
 
-        
 
 if __name__ == '__main__':
     try:
