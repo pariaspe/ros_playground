@@ -2,6 +2,9 @@
 
 import rospy
 from std_msgs.msg import String, Bool
+import time
+
+LOCAL_TIME = "01:00"
 
 class Clock():
     def __init__(self):
@@ -23,21 +26,22 @@ class Clock():
             if self.start_flag:
                 self.hora()
             rate.sleep()
-            rospy.spin()
+            #rospy.spin()
 
     # Enviar cada 60 segundos un topic still_alive a dialogo_nodo
-    def still_alive(self):
-        self.pub.publish()
+    def still_alive(self, event):
+        self.pub.publish(True)
 
     # Mostrar por pantalla cada 1/3 de segundo la hora local y en UTC
     # junto a los segundos transcurridos desde el ultimo topic recibido
     # de dialogo_nodo
     def hora(self):
-            current = rospy.Time.now()
-            seconds = current - self.last
+        current = rospy.Time.now()
+        seconds = current - self.last
 
-            rospy.loginfo('The current time is: ' + current)
-            rospy.loginfo('It has been ' + seconds + ' seconds since the last message was received')
+        ttime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(current.secs))
+        rospy.loginfo(ttime + " Z \n" + ttime + "+" + LOCAL_TIME + " (local)")
+        rospy.loginfo('It has been ' + str(seconds) + ' seconds since the last message was received')
 
     def start_callback(self, msg):
         self.start_msg = msg

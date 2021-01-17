@@ -51,7 +51,7 @@ class Dialogo():
         subprocess.Popen(["espeak", "-v", "es", sentence])
 
     def still_alive_cb(self, msg):
-        rospy.loginfo("Heartbeat received at:", msg)
+        rospy.loginfo("Heartbeat received at: " + str(msg.data))
 
 
 if __name__ == '__main__':
