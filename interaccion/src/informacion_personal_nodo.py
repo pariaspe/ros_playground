@@ -13,9 +13,11 @@ def shutdown():
 
 def talker():
     """Nodo Informacion Personal"""
-    pub = rospy.Publisher('inf_pers_topic', inf_personal_usuario, queue_size=10)  # topic pub
-    rospy.init_node('informacion_usuario_node', anonymous=True)  # se inicia el nodo
+    rospy.init_node('informacion_usuario_node')  # se inicia el nodo
     rospy.on_shutdown(shutdown)  # funcion a ejecutar al salir
+
+    pub = rospy.Publisher('inf_pers_topic', inf_personal_usuario, queue_size=10)  # topic pub
+
     rate = rospy.Rate(RATE) # 10hz
 
     while not rospy.is_shutdown():
@@ -27,8 +29,9 @@ def talker():
             # shutdown
             break
         msg = inf_personal_usuario(nombre=name, edad=age, idiomas=langs.split(" "))  # se crea el msg
-        rospy.loginfo(msg)  # se muestra por pantalla el mensaje a enviar
+        # rospy.loginfo(msg)  # debbuging
         pub.publish(msg)  # se envia msg
+        rospy.loginfo("Sending new package.")
         rate.sleep()  # se duerme (10Hz)
 
 if __name__ == '__main__':

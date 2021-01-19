@@ -10,14 +10,15 @@ def shutdown():
     print(" ")
     rospy.loginfo("Adios!")
 
-
 def emocion_usuario_nodo():
     """Nodo Emocion Usuario"""
     prompt = "Emocion: "
 
-    pub = rospy.Publisher('emocion_topic', String, queue_size=10)  # topic pub
-    rospy.init_node('emocion_usuario_nodo', anonymous=True)  # se inica el nodo
+    rospy.init_node('emocion_usuario_nodo')  # se inica el nodo
     rospy.on_shutdown(shutdown)  # funcion a ejecutar al salir
+
+    pub = rospy.Publisher('emocion_topic', String, queue_size=10)  # topic pub
+
     rate = rospy.Rate(RATE) # 10hz
 
     while not rospy.is_shutdown():
@@ -27,8 +28,9 @@ def emocion_usuario_nodo():
         except EOFError:
             # shutdown
             break
-        rospy.loginfo(user_str)  # se muestra por pantalla el mensaje a enviar
+        # rospy.loginfo(user_str)  # debbuging
         pub.publish(user_str)  # se envia msg
+        rospy.loginfo("Sending new package.")
         rate.sleep()  # se duerme (10Hz)
 
 if __name__ == '__main__':

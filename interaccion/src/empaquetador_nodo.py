@@ -9,6 +9,8 @@ class Empaquetador():
     """Nodo Empaquetador"""
     def __init__(self):
         """Inicializacion del nodo"""
+        rospy.init_node("empaquetador_node")  # se inicia el nodo
+
         # Mensajes a None
         self.inf_pers = None
         self.emocion = None
@@ -16,13 +18,12 @@ class Empaquetador():
 
         self.usuario_msg = usuario()  # msg vacio
 
+        self.pub = rospy.Publisher("user_topic", usuario, queue_size=10)  # topic pub
+
         rospy.Subscriber("/inf_pers_topic", inf_personal_usuario, self.inf_pers_cb)  # sub a nodo inf_personal
         rospy.Subscriber("/emocion_topic", String, self.emocion_usr_cb)  # sub a nodo emocion
         rospy.Subscriber("/pos_usuario_topic", pos_usuario, self.posicion_cb)  # sub a nodo posicion
 
-        self.pub = rospy.Publisher("user_topic", usuario, queue_size=10)  # topic pub
-
-        rospy.init_node("empaquetador_node")  # se inicia el nodo
         rospy.spin()
 
     def inf_pers_cb(self, msg):

@@ -5,6 +5,9 @@ from __future__ import print_function
 from interaccion.srv import multiplicador
 import rospy
 
+PREFIX = "[MATEMATICO] "  # por propositos de legibilidad
+
+
 def multiplicar_edad(req):
     """Multiplica edad por MULT"""
     resultado = req.MULT * req.edad
@@ -14,6 +17,7 @@ def multiplicar_edad(req):
 def matematico_nodo():
     """Nodo matematico"""
     rospy.init_node('matematico_nodo')
+    rospy.loginfo(PREFIX + "Nodo iniciado")
 
     s = rospy.Service('multiplicador', multiplicador, multiplicar_edad)  # respuesta al cliente
     rospy.loginfo("Listo para multiplicar la edad")
