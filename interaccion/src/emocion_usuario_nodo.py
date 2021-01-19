@@ -3,27 +3,33 @@
 import rospy
 from std_msgs.msg import String
 
-def emocion_usuario_nodo():
-    prompt = "Enter a string: "
+RATE  = 10
 
-    pub = rospy.Publisher('emocion_topic', String, queue_size=10)
-    rospy.init_node('emocion_usuario_nodo', anonymous=True)
-    rate = rospy.Rate(10) # 10hz
+def shutdown():
+    """Funcion salida"""
+    print(" ")
+    rospy.loginfo("Adios!")
+
+
+def emocion_usuario_nodo():
+    """Nodo Emocion Usuario"""
+    prompt = "Emocion: "
+
+    pub = rospy.Publisher('emocion_topic', String, queue_size=10)  # topic pub
+    rospy.init_node('emocion_usuario_nodo', anonymous=True)  # se inica el nodo
+    rospy.on_shutdown(shutdown)  # funcion a ejecutar al salir
+    rate = rospy.Rate(RATE) # 10hz
 
     while not rospy.is_shutdown():
         try:
-            #Take user input and transform it to string
-            user_str = raw_input(prompt)
+            user_str = raw_input(prompt)  # lectura por entrada
             user_str = str(user_str)
         except EOFError:
             # shutdown
             break
-
-        #print(user_str)
-
-        rospy.loginfo(user_str)
-        pub.publish(user_str)
-        rate.sleep()
+        rospy.loginfo(user_str)  # se muestra por pantalla el mensaje a enviar
+        pub.publish(user_str)  # se envia msg
+        rate.sleep()  # se duerme (10Hz)
 
 if __name__ == '__main__':
     try:

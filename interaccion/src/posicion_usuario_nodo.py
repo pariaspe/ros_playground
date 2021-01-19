@@ -6,22 +6,23 @@ from interaccion.msg import pos_usuario
 
 RATE = 10
 
-is_remote = False
+is_remote = False  # Flag para lanzar nodo en remoto sobre RaspberryPi
 
 def shutdown():
+    """Funcion salida"""
     print(" ")
-    rospy.loginfo("Bye!")
+    rospy.loginfo("Adios!")
 
 def posicion_usuario():
-
-    pub = rospy.Publisher('pos_usuario_topic', pos_usuario, queue_size=10) # topic
-    rospy.init_node('posicion_usuario_nodo', anonymous=True) # nodo
-    rospy.on_shutdown(shutdown)
-    rate = rospy.Rate(RATE) # Frecuencia a 10hz
+    """Nodo Posicion Usuario"""
+    pub = rospy.Publisher('pos_usuario_topic', pos_usuario, queue_size=10)  # topic pub
+    rospy.init_node('posicion_usuario_nodo', anonymous=True)  # se inicia el nodo
+    rospy.on_shutdown(shutdown)  # funcion a ejecutar al salir
+    rate = rospy.Rate(RATE)  # Frecuencia a 10hz
 
     rospy.loginfo("Remote is:" + str(is_remote))
 
-    if is_remote: # Remote execution case
+    if is_remote:
         while not rospy.is_shutdown():
         	try:
         		x_pos = 1
@@ -35,7 +36,7 @@ def posicion_usuario():
         	pub.publish(msg)
         	rate.sleep()
 
-    else: 
+    else:
         while not rospy.is_shutdown():
         	try:
         		x_pos = int(raw_input("Posicion en x: "))
@@ -52,7 +53,7 @@ def posicion_usuario():
 if __name__ == '__main__':
 
     ##if(len(sys.argv) == 2): # Not very sophisticated arg checking, assumes good usage
-    if sys.argv[-1] == "remote":   
+    if sys.argv[-1] == "remote":
         remote = True
     try:
         posicion_usuario()
