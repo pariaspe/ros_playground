@@ -42,9 +42,9 @@ def posicion_usuario():
     else:
         while not rospy.is_shutdown():
             try:
-                x_pos = int(raw_input("Posicion en x: "))
-                y_pos = int(raw_input("Posicion en y: "))
-                z_pos = int(raw_input("Posicion en z: "))
+                x_pos = int(raw_input("X position: "))
+                y_pos = int(raw_input("Y position: "))
+                z_pos = int(raw_input("z position: "))
             except EOFError:
             # shutdown
                 break
