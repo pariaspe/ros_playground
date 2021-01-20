@@ -7,7 +7,7 @@ from interaccion.srv import multiplicador
 
 import subprocess
 
-PREFIX = "[DIALOGO] "  # for readability purposes
+PREFIX = "[DIALOGO] "  #  por propositos de legibilidad
 
 
 class Dialogo():
