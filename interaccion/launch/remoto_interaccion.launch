@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="cmd-bash" default="gnome-terminal --command"/>
+    
+    <machine name="pizero" address="192.168.1.53" env-loader="/opt/ros/kinetic/env.sh" password="raspberry" user="pi"/>
+    <machine name="pi-zero" address="192.168.1.53" env-loader="/opt/ros/kinetic/env.sh" password="raspberry" user="pi"/>
+        
+    <node name="matematico" pkg="interaccion" type="matematico_nodo.py" launch-prefix="$(arg cmd-bash)"/>
+    <node name="informacion" pkg="interaccion" type="informacion_personal_nodo.py" launch-prefix="$(arg cmd-bash)"/>
+    <node machine="pi-zero" name="posicion" pkg="interaccion" type="posicion_usuario_nodo.py" output="screen"/>
+    <!--<node name="posicion" pkg="interaccion" type="posicion_usuario_nodo.py" />-->
+    <node name="emocion" pkg="interaccion" type="emocion_usuario_nodo.py" launch-prefix="$(arg cmd-bash)"/>
+    <node name="empaquetador" pkg="interaccion" type="empaquetador_nodo.py" output="screen"/>
+    <node name="dialogo" pkg="interaccion" type="dialogo_nodo.py" launch-prefix="$(arg cmd-bash)"/>
+    <node name="reloj" pkg="interaccion" type="reloj_nodo.py" output="screen"/>
+</launch>
