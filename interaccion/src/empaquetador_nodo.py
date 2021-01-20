@@ -29,7 +29,7 @@ class Empaquetador():
     def inf_pers_cb(self, msg):
         """Callback que recibe los mensajes del inf_pers_topic"""
         self.inf_pers = msg  # se guarda el msg
-        rospy.loginfo("Inf pers received: ({0} {1} {2})".format(msg.nombre, msg.edad, msg.idiomas))
+        rospy.loginfo("Personal information received: ({0} {1} {2})".format(msg.nombre, msg.edad, msg.idiomas))
         # Si se han recibido los tres msgs, se envia paquete
         if self.inf_pers is not None and self.emocion is not None and self.posicion is not None:
             self.send_package()
