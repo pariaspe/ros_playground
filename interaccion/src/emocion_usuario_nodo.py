@@ -14,7 +14,7 @@ def emocion_usuario_nodo():
     """Nodo Emocion Usuario"""
     prompt = "Emocion: "
 
-    rospy.init_node('emocion_usuario_nodo')  # se inica el nodo
+    rospy.init_node('emocion_usuario_nodo')  # se inicia el nodo
     rospy.on_shutdown(shutdown)  # funcion a ejecutar al salir
 
     pub = rospy.Publisher('emocion_topic', String, queue_size=10)  # topic pub
