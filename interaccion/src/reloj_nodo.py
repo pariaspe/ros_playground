@@ -12,7 +12,7 @@ class Clock():
     """Nodo Reloj"""
     def __init__(self):
         rospy.init_node("reloj_nodo")
-        rospy.loginfo(PREFIX + "Nodo iniciado")
+        rospy.loginfo(PREFIX + "Node started")
 
         self.start_flag = False
 

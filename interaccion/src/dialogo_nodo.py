@@ -15,7 +15,7 @@ class Dialogo():
     def __init__(self):
         """Inicializacion del nodo"""
         rospy.init_node("dialogo_node")  # se inicia nodo
-        rospy.loginfo(PREFIX + "Nodo iniciado")
+        rospy.loginfo(PREFIX + "Node started")
 
         self.started = False  # flag para el timer
 
@@ -42,7 +42,7 @@ class Dialogo():
         rospy.loginfo(PREFIX + self.process_usuario_msg(self.usuario_msg))
 
         resp = self.multiplicador(int(self.usuario_msg.infPersonal.edad))  # llamada al servidor multiplicador
-        rospy.loginfo(PREFIX + "Resultado de la multiplicacion: " + str(resp.resultado))
+        rospy.loginfo(PREFIX + "Result of multiplication: " + str(resp.resultado))
 
         if not self.started:
             self.start_pub.publish("start")  # se publica msg por topic start
@@ -60,10 +60,10 @@ class Dialogo():
 
     def process_usuario_msg(self, msg):
         """Procesa y da formato al mensaje"""
-        info = "Usuario (" + msg.infPersonal.nombre + ", " \
+        info = "User (" + msg.infPersonal.nombre + ", " \
         + str(msg.infPersonal.edad) + ", " + str(msg.infPersonal.idiomas) \
-        + ") en [" + str(msg.posicion.x) + ", " + str(msg.posicion.y) + ", " \
-        + str(msg.posicion.z) + "] esta " + msg.emocion
+        + ") at [" + str(msg.posicion.x) + ", " + str(msg.posicion.y) + ", " \
+        + str(msg.posicion.z) + "] is " + msg.emocion
         return info
 
 if __name__ == '__main__':
