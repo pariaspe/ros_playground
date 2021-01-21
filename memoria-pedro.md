@@ -292,3 +292,18 @@ Tal como se muestra en el vídeo, el consumo de RAM y CPU en ejecución no es el
 Por ultimo, se adjunta otro vídeo donde se realiza una ejecución del paquete en remoto. El vídeo tiene dos partes, en la primera se muestra la ejecución entre dos PCs mientras que en la segunda se muestra la ejecución entre un PC y una RAspberry Pi.
 
 [![Video Remoto](http://img.youtube.com/vi/8Ytfg5aUvMw/0.jpg)](http://www.youtube.com/watch?v=8Ytfg5aUvMw)
+
+Para poder ejecutar en diferentes máquinas, ha sido necesario utilizar dos variables de entorno de ROS. En el equipo donde se ejecuta el roscore se han añadido `ROS_MASTER_URI` apuntando a la dirección IP de localhost y con el puerto por defecto (11311), junto con `ROS_IP` con la dirección IP de la propia máquina en la subred local.
+Por otro lado, la máquina en remoto introduce en `ROS_MASTER_URI` la dirección IP de la máquina con el roscore y el mismo puerto (11311), junto con junto con `ROS_IP` con la dirección IP de la propia máquina en la subred local.
+
+```bash
+# Maquina con el roscore
+export ROS_MASTER_URI=http://localhost:11311
+export ROS_IP=my_ip  # ip correspondiente su propia dirección en la red local
+
+------------------------------------
+
+# Maquina remota
+export ROS_MASTER_URI=http://my_ip:11311  # ip de la maquina con roscore
+export ROS_IP=other_ip  # ip correspondiente su propia dirección en la red local
+```
