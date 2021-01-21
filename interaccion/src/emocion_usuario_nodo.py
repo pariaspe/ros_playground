@@ -12,7 +12,7 @@ def shutdown():
 
 def emocion_usuario_nodo():
     """Nodo Emocion Usuario"""
-    prompt = "Emocion: "
+    prompt = "Emotion: "
 
     rospy.init_node('emocion_usuario_nodo')  # se inicia el nodo
     rospy.on_shutdown(shutdown)  # funcion a ejecutar al salir

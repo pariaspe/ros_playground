@@ -11,7 +11,7 @@ is_remote = False  # Flag para lanzar nodo en remoto sobre RaspberryPi
 def shutdown():
     """Funcion salida"""
     print(" ")
-    rospy.loginfo("Adios!")
+    rospy.loginfo("Bye!")
 
 def posicion_usuario():
     """Nodo Posicion Usuario"""

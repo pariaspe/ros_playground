@@ -8,7 +8,7 @@ RATE = 10
 def shutdown():
     """Funcion salida"""
     print(" ")
-    rospy.loginfo("Adios!")
+    rospy.loginfo("Bye!")
 
 
 def talker():
@@ -22,9 +22,9 @@ def talker():
 
     while not rospy.is_shutdown():
         try:
-            name = str(raw_input("Nombre: "))  # lectura por entrada
-            age = int(raw_input("Edad: "))
-            langs = raw_input("Idiomas: ")
+            name = str(raw_input("Name: "))  # lectura por entrada
+            age = int(raw_input("Age: "))
+            langs = raw_input("Languages: ")
         except EOFError:
             # shutdown
             break
