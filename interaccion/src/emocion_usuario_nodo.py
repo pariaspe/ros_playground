@@ -8,7 +8,7 @@ RATE  = 10
 def shutdown():
     """Funcion salida"""
     print(" ")
-    rospy.loginfo("Adios!")
+    rospy.loginfo("Bye!")
 
 def emocion_usuario_nodo():
     """Nodo Emocion Usuario"""
