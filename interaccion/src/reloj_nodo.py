@@ -19,12 +19,12 @@ class Clock():
         # Se crea un contador que llama a la funcion still_alive cada LAP segundos
         timer_alive = rospy.Timer(rospy.Duration(LAP), self.still_alive)
 
+        self.pub = rospy.Publisher("still_alive", Bool, queue_size=10)  # topic pub
+
         # Recibir topic start_topic de dialogo_nodo para activar el timer
         rospy.Subscriber("/start_topic", String, self.start_callback)
         # Recibir topic reset_topic de dialogo_nodo para resetear el timer
         rospy.Subscriber("/reset_topic", String, self.reset_callback)
-
-        self.pub = rospy.Publisher("still_alive", Bool, queue_size=10)  # topic pub
 
         rate = rospy.Rate(3) # 3Hz
 
